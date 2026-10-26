@@ -1,0 +1,27 @@
+{
+  "deployed": true,
+  "network": "GenLayer Studionet",
+  "chainId": 61999,
+  "rpc": "https://studio.genlayer.com/api",
+  "explorer": "https://explorer-studio.genlayer.com",
+  "address": "0x2628ee871f5a0A0391D851C181B493faD3666feb",
+  "sourceSha256": "08ad96fe2642be5008066637f3d31a6bac96ccab1471cb3493a25cc46e2c6595",
+  "deploymentTransaction": "0x6d60810c899458197c5c626b45f41dec22bdd0240caade568dfe4a25358df284",
+  "deploymentReceipt": {
+    "status": "FINALIZED",
+    "execution": "SUCCESS",
+    "executionResult": "SUCCESS",
+    "consensusResult": "MAJORITY_AGREE",
+    "leaderOnly": false,
+    "votes": {
+      "0x0eb3859451817bC25Cc717D4F676D54D0D3aD0aE": "idle",
+      "0x336458747913FE397be82c4F0926ACeB3ab13618": "idle",
+      "0x378aED3bA912Ce77C3C66155961A7e61C2fE8F3B": "agree",
+      "0x4441Ebe37E72c039B73f1D6CF8C6DEe277FE547a": "agree",
+      "0xb9ed1258763dfFC83356b15e8A20236B86E42ba2": "agree"
+    },
+    "createdAt": "2026-10-26T12:16:59.876421+00:00",
+    "observedAt": "2026-10-26T12:17:36.489Z"
+  },
+  "notice": "Synthetic project-controlled traces. Fixed finite RFC6455 profile; no complete RFC conformance or real network authenticity claim."
+}

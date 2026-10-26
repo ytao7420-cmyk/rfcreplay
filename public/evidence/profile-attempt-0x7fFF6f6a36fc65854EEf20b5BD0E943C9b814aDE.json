@@ -1,0 +1,122 @@
+{
+  "status": "FAILED_ATTESTATION_RETAINED",
+  "chainId": 61999,
+  "contractAddress": "0x7fFF6f6a36fc65854EEf20b5BD0E943C9b814aDE",
+  "sourceSha256": "4de625814bedadbfc31b701b9ef90ee2549331281f4a10c64c3e692c36a1047c",
+  "profile": {
+    "certificate": null,
+    "expected_document_sha256": "765775326aee0ecca9b04bde3fd1f52932d498e33e34e428bd61b8a24da0fa3b",
+    "id": "rfcreplay-rfc6455-v1",
+    "owner": "0x54c15e3b44a68523170d995a76b2c6240d73c4ff",
+    "rule_version": "rfc6455-bounded-v1",
+    "source": {
+      "document_sha256": "765775326aee0ecca9b04bde3fd1f52932d498e33e34e428bd61b8a24da0fa3b",
+      "sections": {
+        "5.4": "5.4.  Fragmentation\n\n   The primary purpose of fragmentation is to allow sending a message\n   that is of unknown size when the message is started without having to\n   buffer that message.  If messages couldn't be fragmented, then an\n   endpoint would have to buffer the entire message so its length could\n   be counted before the first byte is sent.  With fragmentation, a\n   server or intermediary may choose a reasonable size buffer and, when\n   the buffer is full, write a fragment to the network.\n\n   A secondary use-case for fragmentation is for multiplexing, where it\n   is not desirable for a large message on one logical channel to\n   monopolize the output channel, so the multiplexing needs to be free\n\n\n\nFette & Melnikov             Standards Track                   [Page 33]\n\f\nRFC 6455                 The WebSocket Protocol            December 2011\n\n\n   to split the message into smaller fragments to better share the\n   output channel.  (Note that the multiplexing extension is not\n   described in this document.)\n\n   Unless specified otherwise by an extension, frames have no semantic\n   meaning.  An intermediary might coalesce and/or split frames, if no\n   extensions were negotiated by the client and the server or if some\n   extensions were negotiated, but the intermediary understood all the\n   extensions negotiated and knows how to coalesce and/or split frames\n   in the presence of these extensions.  One implication of this is that\n   in absence of extensions, senders and receivers must not depend on\n   the presence of specific frame boundaries.\n\n   The following rules apply to fragmentation:\n\n   o  An unfragmented message consists of a single frame with the FIN\n      bit set (Section 5.2) and an opcode other than 0.\n\n   o  A fragmented message consists of a single frame with the FIN bit\n      clear and an opcode other than 0, followed by zero or more frames\n      with the FIN bit clear and the opcode set to 0, and terminated by\n      a single frame with the FIN bit set and an opcode of 0.  A\n      fragmented message is conceptually equivalent to a single larger\n      message whose payload is equal to the concatenation of the\n      payloads of the fragments in order; however, in the presence of\n      extensions, this may not hold true as the extension defines the\n      interpretation of the \"Extension data\" present.  For instance,\n      \"Extension data\" may only be present at the beginning of the first\n      fragment and apply to subsequent fragments, or there may be\n      \"Extension data\" present in each of the fragments that applies\n      only to that particular fragment.  In the absence of \"Extension\n      data\", the following example demonstrates how fragmentation works.\n\n      EXAMPLE: For a text message sent as three fragments, the first\n      fragment would have an opcode of 0x1 and a FIN bit clear, the\n      second fragment would have an opcode of 0x0 and a FIN bit clear,\n      and the third fragment would have an opcode of 0x0 and a FIN bit\n      that is set.\n\n   o  Control frames (see Section 5.5) MAY be injected in the middle of\n      a fragmented message.  Control frames themselves MUST NOT be\n      fragmented.\n\n   o  Message fragments MUST be delivered to the recipient in the order\n      sent by the sender.\n\n\n\n\n\n\nFette & Melnikov             Standards Track                   [Page 34]\n\f\nRFC 6455                 The WebSocket Protocol            December 2011\n\n\n   o  The fragments of one message MUST NOT be interleaved between the\n      fragments of another message unless an extension has been\n      negotiated that can interpret the interleaving.\n\n   o  An endpoint MUST be capable of handling control frames in the\n      middle of a fragmented message.\n\n   o  A sender MAY create fragments of any size for non-control\n      messages.\n\n   o  Clients and servers MUST support receiving both fragmented and\n      unfragmented messages.\n\n   o  As control frames cannot be fragmented, an intermediary MUST NOT\n      attempt to change the fragmentation of a control frame.\n\n   o  An intermediary MUST NOT change the fragmentation of a message if\n      any reserved bit values are used and the meaning of these values\n      is not known to the intermediary.\n\n   o  An intermediary MUST NOT change the fragmentation of any message\n      in the context of a connection where extensions have been\n      negotiated and the intermediary is not aware of the semantics of\n      the negotiated extensions.  Similarly, an intermediary that didn't\n      see the WebSocket handshake (and wasn't notified about its\n      content) that resulted in a WebSocket connection MUST NOT change\n      the fragmentation of any message of such connection.\n\n   o  As a consequence of these rules, all fragments of a message are of\n      the same type, as set by the first fragment's opcode.  Since\n      control frames cannot be fragmented, the type for all fragments in\n      a message MUST be either text, binary, or one of the reserved\n      opcodes.\n\n   NOTE: If control frames could not be interjected, the latency of a\n   ping, for example, would be very long if behind a large message.\n   Hence, the requirement of handling control frames in the middle of a\n   fragmented message.\n\n   IMPLEMENTATION NOTE: In the absence of any extension, a receiver\n   doesn't have to buffer the whole frame in order to process it.  For\n   example, if a streaming API is used, a part of a frame can be\n   delivered to the application.  However, note that this assumption\n   might not hold true for all future WebSocket extensions.\n\n\n\n\n\n\n\nFette & Melnikov             Standards Track                   [Page 35]\n\f\nRFC 6455                 The WebSocket Protocol            December 2011\n\n",
+        "5.5": "5.5.  Control Frames\n\n   Control frames are identified by opcodes where the most significant\n   bit of the opcode is 1.  Currently defined opcodes for control frames\n   include 0x8 (Close), 0x9 (Ping), and 0xA (Pong).  Opcodes 0xB-0xF are\n   reserved for further control frames yet to be defined.\n\n   Control frames are used to communicate state about the WebSocket.\n   Control frames can be interjected in the middle of a fragmented\n   message.\n\n   All control frames MUST have a payload length of 125 bytes or less\n   and MUST NOT be fragmented.\n",
+        "5.5.1": "5.5.1.  Close\n\n   The Close frame contains an opcode of 0x8.\n\n   The Close frame MAY contain a body (the \"Application data\" portion of\n   the frame) that indicates a reason for closing, such as an endpoint\n   shutting down, an endpoint having received a frame too large, or an\n   endpoint having received a frame that does not conform to the format\n   expected by the endpoint.  If there is a body, the first two bytes of\n   the body MUST be a 2-byte unsigned integer (in network byte order)\n   representing a status code with value /code/ defined in Section 7.4.\n   Following the 2-byte integer, the body MAY contain UTF-8-encoded data\n   with value /reason/, the interpretation of which is not defined by\n   this specification.  This data is not necessarily human readable but\n   may be useful for debugging or passing information relevant to the\n   script that opened the connection.  As the data is not guaranteed to\n   be human readable, clients MUST NOT show it to end users.\n\n   Close frames sent from client to server must be masked as per\n   Section 5.3.\n\n   The application MUST NOT send any more data frames after sending a\n   Close frame.\n\n   If an endpoint receives a Close frame and did not previously send a\n   Close frame, the endpoint MUST send a Close frame in response.  (When\n   sending a Close frame in response, the endpoint typically echos the\n   status code it received.)  It SHOULD do so as soon as practical.  An\n   endpoint MAY delay sending a Close frame until its current message is\n   sent (for instance, if the majority of a fragmented message is\n   already sent, an endpoint MAY send the remaining fragments before\n   sending a Close frame).  However, there is no guarantee that the\n   endpoint that has already sent a Close frame will continue to process\n   data.\n\n\n\nFette & Melnikov             Standards Track                   [Page 36]\n\f\nRFC 6455                 The WebSocket Protocol            December 2011\n\n\n   After both sending and receiving a Close message, an endpoint\n   considers the WebSocket connection closed and MUST close the\n   underlying TCP connection.  The server MUST close the underlying TCP\n   connection immediately; the client SHOULD wait for the server to\n   close the connection but MAY close the connection at any time after\n   sending and receiving a Close message, e.g., if it has not received a\n   TCP Close from the server in a reasonable time period.\n\n   If a client and server both send a Close message at the same time,\n   both endpoints will have sent and received a Close message and should\n   consider the WebSocket connection closed and close the underlying TCP\n   connection.\n"
+      },
+      "url": "https://www.rfc-editor.org/rfc/rfc6455.txt"
+    },
+    "source_digest": "ef7a38c3d45d79f328f99015ee5276d8bd5d57bf38938c2450ee888705c1aeed",
+    "state": "SOURCE_READY"
+  },
+  "transactions": [
+    {
+      "label": "open-profile",
+      "spec": {
+        "kind": "call",
+        "address": "0x7fFF6f6a36fc65854EEf20b5BD0E943C9b814aDE",
+        "actor": "0x54c15E3b44A68523170d995a76B2c6240D73c4Ff",
+        "method": "open_profile",
+        "args": [
+          "rfcreplay-rfc6455-v1",
+          "765775326aee0ecca9b04bde3fd1f52932d498e33e34e428bd61b8a24da0fa3b"
+        ],
+        "value": "0",
+        "leaderOnly": false
+      },
+      "intendedAt": "2026-10-26T10:28:38.056Z",
+      "status": "ACCEPTED",
+      "execution": "SUCCESS",
+      "hash": "0x6262a52ff25b2be231342e9c7d636462b5707efc857ec0f495f99f504e6f3a03",
+      "submittedAt": "2026-10-26T10:28:40.640Z",
+      "executionResult": "SUCCESS",
+      "consensusResult": "MAJORITY_AGREE",
+      "leaderOnly": false,
+      "votes": {
+        "0x0eb3859451817bC25Cc717D4F676D54D0D3aD0aE": "idle",
+        "0x378aED3bA912Ce77C3C66155961A7e61C2fE8F3B": "agree",
+        "0x5D9Ee6E9aAF2F0b739314A52dd9Da57cd8866dA8": "idle",
+        "0xCe0B66448435cA53665C954705Abd753515594Cf": "agree",
+        "0xcab45E3fe9cC9592B5C378E47734E022b7Df80c9": "agree"
+      },
+      "createdAt": "2026-10-26T10:28:40.008839+00:00",
+      "observedAt": "2026-10-26T10:28:46.036Z"
+    },
+    {
+      "label": "capture-official-source",
+      "spec": {
+        "kind": "call",
+        "address": "0x7fFF6f6a36fc65854EEf20b5BD0E943C9b814aDE",
+        "actor": "0x54c15E3b44A68523170d995a76B2c6240D73c4Ff",
+        "method": "capture_source",
+        "args": [
+          "rfcreplay-rfc6455-v1"
+        ],
+        "value": "0",
+        "leaderOnly": false
+      },
+      "intendedAt": "2026-10-26T10:28:46.047Z",
+      "status": "ACCEPTED",
+      "execution": "SUCCESS",
+      "hash": "0xb157132a3fd0cd6e9e2c97bb05f2e020eeeacec8e4f024ba461ee5f7e3737202",
+      "submittedAt": "2026-10-26T10:28:48.604Z",
+      "executionResult": "SUCCESS",
+      "consensusResult": "MAJORITY_AGREE",
+      "leaderOnly": false,
+      "votes": {
+        "0x5e84e17266a193077728229751aC8A1dD24be146": "agree",
+        "0xCe0B66448435cA53665C954705Abd753515594Cf": "idle",
+        "0xF7D08d12dB37D3e02D1833b5cB7e56B07F114186": "idle",
+        "0xb9ed1258763dfFC83356b15e8A20236B86E42ba2": "agree",
+        "0xe06A34A1eBd398AF3399d08593B8c3C433CdD947": "agree"
+      },
+      "createdAt": "2026-10-26T10:28:48.328795+00:00",
+      "observedAt": "2026-10-26T10:28:54.467Z"
+    },
+    {
+      "label": "attest-five-rules",
+      "spec": {
+        "kind": "call",
+        "address": "0x7fFF6f6a36fc65854EEf20b5BD0E943C9b814aDE",
+        "actor": "0x54c15E3b44A68523170d995a76B2c6240D73c4Ff",
+        "method": "attest_profile",
+        "args": [
+          "rfcreplay-rfc6455-v1"
+        ],
+        "value": "0",
+        "leaderOnly": false
+      },
+      "intendedAt": "2026-10-26T10:28:54.478Z",
+      "status": "UNDETERMINED",
+      "execution": "UNCONFIRMED_OR_FAILED",
+      "hash": "0x21c6fa1119c2ee4787d9059e6ca0b3cf64d6aab6d10f53c71811aa3037ab7ddd",
+      "submittedAt": "2026-10-26T10:28:57.937Z",
+      "executionResult": "ERROR",
+      "consensusResult": "MAJORITY_DISAGREE",
+      "leaderOnly": false,
+      "votes": {
+        "0x336458747913FE397be82c4F0926ACeB3ab13618": "disagree",
+        "0x5e84e17266a193077728229751aC8A1dD24be146": "idle",
+        "0xb04cdDC4a6Ff6A0aDF715cfe00Fa307b901cebD4": "disagree",
+        "0xb9ed1258763dfFC83356b15e8A20236B86E42ba2": "disagree",
+        "0xe06A34A1eBd398AF3399d08593B8c3C433CdD947": "idle"
+      },
+      "createdAt": "2026-10-26T10:28:57.709102+00:00",
+      "observedAt": "2026-10-26T10:30:20.787Z",
+      "failure": "Transaction lifecycle is UNDETERMINED; no committed success established."
+    }
+  ],
+  "notice": "Actual failed attestation attempt; no supported profile or verified application workflow was established. Do not reroll this unchanged proposal or count it as an expected successful negative test."
+}

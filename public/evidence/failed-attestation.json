@@ -1,0 +1,25 @@
+{
+  "observedAt": "2026-10-26T10:31:55.583Z",
+  "network": "GenLayer Studionet",
+  "chainId": 61999,
+  "contractAddress": "0x7fFF6f6a36fc65854EEf20b5BD0E943C9b814aDE",
+  "sourceSha256": "4de625814bedadbfc31b701b9ef90ee2549331281f4a10c64c3e692c36a1047c",
+  "profileId": "rfcreplay-rfc6455-v1",
+  "profileState": "SOURCE_READY",
+  "sourceDigest": "ef7a38c3d45d79f328f99015ee5276d8bd5d57bf38938c2450ee888705c1aeed",
+  "hash": "0x21c6fa1119c2ee4787d9059e6ca0b3cf64d6aab6d10f53c71811aa3037ab7ddd",
+  "status": "UNDETERMINED",
+  "consensusResult": "MAJORITY_DISAGREE",
+  "leaderOnly": false,
+  "leaderExecution": "ERROR",
+  "leaderResult": "rollback",
+  "error": "Rule quote is not an exact passage from its frozen section",
+  "votes": {
+    "0x336458747913FE397be82c4F0926ACeB3ab13618": "disagree",
+    "0x5e84e17266a193077728229751aC8A1dD24be146": "idle",
+    "0xb04cdDC4a6Ff6A0aDF715cfe00Fa307b901cebD4": "disagree",
+    "0xb9ed1258763dfFC83356b15e8A20236B86E42ba2": "disagree",
+    "0xe06A34A1eBd398AF3399d08593B8c3C433CdD947": "idle"
+  },
+  "notice": "Actual failed attestation attempt; no supported profile or verified application workflow was established. Do not reroll this unchanged proposal or count it as an expected successful negative test."
+}

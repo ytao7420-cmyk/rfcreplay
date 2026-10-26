@@ -1,0 +1,49 @@
+{
+  "expectedRejectionVerified": true,
+  "chainId": 61999,
+  "contractAddress": "0x2628ee871f5a0A0391D851C181B493faD3666feb",
+  "sourceSha256": "08ad96fe2642be5008066637f3d31a6bac96ccab1471cb3493a25cc46e2c6595",
+  "notice": "A consensus-accepted rollback is an expected negative test, not successful VM execution.",
+  "transactions": [
+    {
+      "label": "wrong-profile-digest",
+      "spec": {
+        "kind": "call",
+        "address": "0x2628ee871f5a0A0391D851C181B493faD3666feb",
+        "actor": "0xAD35f2eC8074a1625d6f9cd60005c1573d829932",
+        "method": "replay_trace",
+        "args": [
+          "rfcreplay-wrong-profile-lines-v2",
+          "rfcreplay-rfc6455-lines-v2",
+          "0000000000000000000000000000000000000000000000000000000000000000",
+          "[{\"sender\":\"client\",\"opcode\":\"close\",\"fin\":true,\"length\":2},{\"sender\":\"server\",\"opcode\":\"close\",\"fin\":true,\"length\":2}]"
+        ],
+        "value": "0",
+        "leaderOnly": false,
+        "expectedRollback": "Profile digest mismatch"
+      },
+      "intendedAt": "2026-10-26T13:45:32.561Z",
+      "status": "ACCEPTED",
+      "execution": "ERROR",
+      "hash": "0x816241cfad2141aff3ae90a745d9bdccf9c3f5327ec8bd90ba4f0ddb2c0ac455",
+      "submittedAt": "2026-10-26T13:45:39.628Z",
+      "executionResult": "ERROR",
+      "consensusResult": "MAJORITY_AGREE",
+      "leaderOnly": false,
+      "votes": {
+        "0x378aED3bA912Ce77C3C66155961A7e61C2fE8F3B": "agree",
+        "0x5847AF34a4e5bA96490f8c883598f68EC9B0B907": "agree",
+        "0x5e84e17266a193077728229751aC8A1dD24be146": "agree",
+        "0xF7D08d12dB37D3e02D1833b5cB7e56B07F114186": "agree",
+        "0xcab45E3fe9cC9592B5C378E47734E022b7Df80c9": "agree"
+      },
+      "createdAt": "2026-10-26T13:45:37.713335+00:00",
+      "observedAt": "2026-10-26T13:45:43.412Z",
+      "expectedFailure": true,
+      "expectedRollbackVerified": true,
+      "decodedRollback": "Profile digest mismatch",
+      "leaderResultStatus": "rollback",
+      "outcome": "EXPECTED_REJECTION"
+    }
+  ]
+}

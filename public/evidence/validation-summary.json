@@ -1,0 +1,56 @@
+{
+  "verifiedAt": "2026-10-26T13:53:59.995892+00:00",
+  "chainId": 61999,
+  "contractAddress": "0x2628ee871f5a0A0391D851C181B493faD3666feb",
+  "contractSourceSha256": "08ad96fe2642be5008066637f3d31a6bac96ccab1471cb3493a25cc46e2c6595",
+  "deploymentTransaction": "0x6d60810c899458197c5c626b45f41dec22bdd0240caade568dfe4a25358df284",
+  "deploymentExecution": "SUCCESS",
+  "deploymentConsensus": "MAJORITY_AGREE",
+  "profileId": "rfcreplay-rfc6455-lines-v2",
+  "profileState": "READY",
+  "profileCertificateDigest": "9f41e582076da31762e8c546870225c94afdadf2df83112017571408a1c6bb12",
+  "documentSha256": "765775326aee0ecca9b04bde3fd1f52932d498e33e34e428bd61b8a24da0fa3b",
+  "sourceDigest": "ef7a38c3d45d79f328f99015ee5276d8bd5d57bf38938c2450ee888705c1aeed",
+  "successfulApplicationTransactions": 7,
+  "traceOutcomes": [
+    {
+      "id": "rfcreplay-interleaved-lines-v2",
+      "status": "PASS",
+      "code": "OPEN_TRACE"
+    },
+    {
+      "id": "rfcreplay-orphan-lines-v2",
+      "status": "VIOLATION",
+      "code": "ORPHAN_CONTINUATION"
+    },
+    {
+      "id": "rfcreplay-open-fragment-lines-v2",
+      "status": "INCOMPLETE",
+      "code": "OPEN_FRAGMENT"
+    },
+    {
+      "id": "rfcreplay-unknown-opcode-lines-v2",
+      "status": "INPUT_ERROR",
+      "code": "UNKNOWN_OPCODE"
+    }
+  ],
+  "negative": {
+    "hash": "0x816241cfad2141aff3ae90a745d9bdccf9c3f5327ec8bd90ba4f0ddb2c0ac455",
+    "status": "ACCEPTED",
+    "execution": "ERROR",
+    "consensusResult": "MAJORITY_AGREE",
+    "expectedRollbackVerified": true,
+    "decodedRollback": "Profile digest mismatch"
+  },
+  "localTests": {
+    "javascript": 52,
+    "python": 29,
+    "sharedKernelCases": 23
+  },
+  "verifiedArchive": "/evidence/demo.json",
+  "negativeArchive": "/evidence/negative.json",
+  "previousFailedAttempt": "/evidence/failed-attestation.json",
+  "browserWalletQA": false,
+  "contributionSubmitted": false,
+  "notice": "Project-controlled synthetic test actors and traces. Local tests are not consensus. Expected negative rollback remains ERROR. No complete RFC conformance or independent adoption claim."
+}

@@ -1,0 +1,101 @@
+{
+  "phase": "v2_live_workflow_and_expected_negative_verified",
+  "date": "2026-10-26",
+  "contract_source_sha256": "08ad96fe2642be5008066637f3d31a6bac96ccab1471cb3493a25cc46e2c6595",
+  "tests": {
+    "javascript": {
+      "passed": 52,
+      "failed": 0
+    },
+    "python": {
+      "passed": 29,
+      "failed": 0
+    },
+    "shared_kernel_oracle_cases": 23,
+    "complete_kernel_parity": true
+  },
+  "build": {
+    "status": "passed",
+    "static_directory": "dist",
+    "note": "Vite warns main SDK bundle exceeds 500KB; no build failure."
+  },
+  "commands_after_review": [
+    "npm run source",
+    "node scripts/live-test.mjs --deploy --source-sha=08ad96fe2642be5008066637f3d31a6bac96ccab1471cb3493a25cc46e2c6595",
+    "node scripts/live-test.mjs --run",
+    "node scripts/live-test.mjs --negative",
+    "npm run verify"
+  ],
+  "boundaries": [
+    "Do not count local mocks as consensus evidence.",
+    "Official source capture precedes live profile creation.",
+    "UNKNOWN profile result is retained incomplete and not automatically rerolled.",
+    "Negative rollback remains VM ERROR, separately recorded.",
+    "Sites publication and browser QA are owned by parent."
+  ],
+  "next_action": "Parent owns hosted browser wallet QA, public repository/site publication and contribution submission. Preserve both old failed version and current verified v2 evidence.",
+  "rule_version": "rfc6455-bounded-lines-v2",
+  "previous_v1_live_attempt": {
+    "broadcasts_by_worker": 4,
+    "deployment_verified": true,
+    "official_source_captured": true,
+    "workflow_verified": false,
+    "browser_qa_performed": false,
+    "successful_application_writes": 2,
+    "failed_attestation_attempts": 1,
+    "contract_address": "0x7fFF6f6a36fc65854EEf20b5BD0E943C9b814aDE",
+    "deployment_transaction": "0x098f78e5c715dd093e56cda58a72e5103666ae5a723821974936c079265ceaf6",
+    "attestation_transaction": "0x21c6fa1119c2ee4787d9059e6ca0b3cf64d6aab6d10f53c71811aa3037ab7ddd",
+    "attestation_status": "UNDETERMINED",
+    "attestation_error": "Rule quote is not an exact passage from its frozen section",
+    "profile_state": "SOURCE_READY",
+    "certificate": null,
+    "trace_writes": 0,
+    "expected_negative_writes": 0,
+    "archive_verification": "fails correctly: no complete verified demonstration"
+  },
+  "live": {
+    "broadcasts_for_repaired_source": 9,
+    "deployment_verified": true,
+    "workflow_verified": true,
+    "browser_qa_performed": false,
+    "successful_application_writes": 7,
+    "trace_writes": 4,
+    "expected_negative_writes": 1,
+    "expected_negative_execution": "ERROR",
+    "expected_negative_verified": true,
+    "archive_verification": "npm run verify passed: 1 profile, 4 traces, 7 successful application transactions",
+    "contract_address": "0x2628ee871f5a0A0391D851C181B493faD3666feb",
+    "deployment_transaction": "0x6d60810c899458197c5c626b45f41dec22bdd0240caade568dfe4a25358df284",
+    "attestation_transaction": "0x2cad896d07a6f76a072e5688e845658437dbf60ed94e56d041ae17188376ec35",
+    "negative_transaction": "0x816241cfad2141aff3ae90a745d9bdccf9c3f5327ec8bd90ba4f0ddb2c0ac455",
+    "application_actors": "Previously generated project-controlled unfunded Studionet test actors",
+    "source_sha_verified_on_chain": "08ad96fe2642be5008066637f3d31a6bac96ccab1471cb3493a25cc46e2c6595",
+    "network_recovery": "Intermittent Node read timeouts resumed with known journal hashes. A process-local ignored curl proxy preload routed only whitelisted read methods through the existing localhost proxy. Writes used the original SDK transport; no system network setting changed."
+  },
+  "repair": {
+    "wire_fields": [
+      "id",
+      "support",
+      "condition",
+      "spans",
+      "reason"
+    ],
+    "span_count": [
+      1,
+      4
+    ],
+    "inclusive_one_based_lf_lines": true,
+    "ordered_non_overlapping": true,
+    "combined_original_characters": [
+      20,
+      1800
+    ],
+    "quote_reconstructed_by_code": true,
+    "strict_exact_membership": true,
+    "independent_semantic_vector": true,
+    "independent_substantive_audit": true,
+    "rule_meanings_and_replay_kernel_changed": false,
+    "old_source_and_failure_artifacts_retained": true
+  }
+}
