@@ -4,7 +4,7 @@
   "contract_source_sha256": "08ad96fe2642be5008066637f3d31a6bac96ccab1471cb3493a25cc46e2c6595",
   "tests": {
     "javascript": {
-      "passed": 52,
+      "passed": 60,
       "failed": 0
     },
     "python": {

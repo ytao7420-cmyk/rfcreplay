@@ -2,7 +2,7 @@
 
 Current phase: **source-verified v2 Studionet deployment, complete seven-call application workflow and separate expected-rejection test completed.** `public/evidence/demo.json` is `verified:true`, `npm run verify` passes, and the old v1 source/deployment/failure history remains intact. No browser wallet QA or contribution submission has been performed by this worker.
 
-Local results: **52 JavaScript tests and 29 Python tests pass**, including 23 shared labelled kernel cases and full JS/Python result parity. `npm run build`, `npm run plan` and syntax checks pass. Vite reports a non-fatal main SDK bundle warning above 500 KB.
+Local results: **60 JavaScript tests and 29 Python tests pass**, including 23 shared labelled kernel cases and full JS/Python result parity. `npm run build`, `npm run plan` and syntax checks pass. Vite reports a non-fatal main SDK bundle warning above 500 KB.
 
 ## Verified v2 execution — 2026-10-26
 
